@@ -1,15 +1,55 @@
+import { useState } from 'react'
+import { useEffect } from 'react'
+
 import { TextField } from '@fluentui/react/lib/TextField'
 import { PrimaryButton } from '@fluentui/react/lib/Button'
 
-import { handleSubmit } from './util'
+import taskAPI from '../apis/task'
 
 const App = () => {
+
+  const [taskList, setTaskList] = useState([])
+
+  useEffect(
+    () => async () => {
+      const response = await taskAPI.getAll()
+      setTaskList(response.data)
+    },
+    []
+  )
+
+  const handleSubmit = async (e) => {
+    
+    e.preventDefault()
+
+    const form = new FormData(e.currentTarget)
+    const formValues  = Object.fromEntries(form.entries());
+  
+    const response = await taskAPI.add(formValues)
+    if (response.code == 201)
+      setTaskList([
+        response.data,
+        ...taskList
+      ])
+
+  }
 
   return (
     <div className="app-con">
       <div className="list-con">
         <ul className="task-list">
-          <li className="task-card"></li>
+          {
+            taskList.map(
+              (task) => (
+                <li className="task-card" key={task.id}>
+                  <h3 className="task-title">{task.title}</h3>
+                  <p className="task-desc">{task.description}</p>
+                  <button className="del-but">delete</button>
+                  <button className="edit-but">edit</button>
+                </li>
+              )
+            )
+          }
         </ul>
       </div>
       <div className="form-con">
@@ -17,7 +57,7 @@ const App = () => {
           <div className="title-con">
             <TextField 
               label='Task title' 
-              name='title'               
+              name='title'
               onGetErrorMessage={(val) => val === '' ? 'Please fill in task title' : ''}
               validateOnFocusOut
               required
@@ -35,6 +75,7 @@ const App = () => {
       </div>
     </div>
   )
+
 }
 
 export default App
