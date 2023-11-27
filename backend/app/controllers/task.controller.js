@@ -23,5 +23,25 @@ module.exports = {
                 err.status = 400
             next(err)
         }
+    },
+    getAll : (req, res, next) => {
+        
+        try {
+
+            return res.status(201).json({
+                success: true,
+                code: 200,
+                message: "Get all tasks successfully",
+                data: db['tasks']
+            });
+
+        } 
+        catch (err) {
+
+            if(err.message === 'INVALID_PAYLOAD')
+                err.status = 400
+            next(err)
+
+        }
     }
 }
