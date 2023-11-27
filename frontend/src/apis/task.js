@@ -36,5 +36,22 @@ export default {
         const json = await response.json()
   
         return json
+      },
+      deleteById : async (id) => {
+
+        const route = '/task'
+        const req_url = app_url + route
+      
+        const data = {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ id })
+        }
+        
+        const response =  await fetch(req_url, data)
+        return response
+  
       }
 }
