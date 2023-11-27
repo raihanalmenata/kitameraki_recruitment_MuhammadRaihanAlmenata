@@ -34,6 +34,23 @@ const App = () => {
 
   }
 
+  const handleDelete = async (id) => {
+  
+    const response = await taskAPI.deleteById(id)
+    if (response.status == 204){
+      for (let i = 0; i < taskList.length; i++) {                
+        const curId = taskList[i]['id']
+        if(curId == id){
+          console.log('found');
+          taskList.splice(i, 1)
+          break
+        }
+      }
+      setTaskList([...taskList])
+    }
+
+  }
+
   return (
     <div className="app-con">
       <div className="list-con">
@@ -44,7 +61,7 @@ const App = () => {
                 <li className="task-card" key={task.id}>
                   <h3 className="task-title">{task.title}</h3>
                   <p className="task-desc">{task.description}</p>
-                  <button className="del-but">delete</button>
+                  <button className="del-but" onClick={() => handleDelete(task.id)}>delete</button>
                   <button className="edit-but">edit</button>
                 </li>
               )
