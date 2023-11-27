@@ -7,6 +7,7 @@ const taskController = require('../controllers/task.controller')
 router.use(require('../middlewares/logger.middleware'))
 
 /* Routes */
+router.get('/', taskController.getAll)
 router.post('/', taskController.insert)
 
 module.exports = router
