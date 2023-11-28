@@ -20,10 +20,14 @@ export default {
         return json
         
     },
-    getAll : async () => {
+    get : async (params) => {
+
+        let query = ''
+        if(params)
+          query = '?' + new URLSearchParams(params).toString()
 
         const route = '/task'
-        const req_url = app_url + route
+        const req_url = app_url + route + query
       
         const data = {
           method: "GET",
