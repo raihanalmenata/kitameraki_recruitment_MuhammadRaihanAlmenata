@@ -22,10 +22,11 @@ module.exports = {
             next(err)
         }
     },
-    getAll : (req, res, next) => {
+    get : (req, res, next) => {
         
         try {
 
+            if(!req.query)
             return res.status(200).json({
                 success: true,
                 code: 200,
@@ -33,10 +34,23 @@ module.exports = {
                 data: db['tasks']
             });
 
+            const { current, size } = req.query
+            if (current && size)
+                return res.status(200).json({
+                    success: true,
+                    code: 200,
+                    message: `Get ${size} later tasks successfully`,
+                    data: db['tasks'].slice(parseInt(current), parseInt(current + size))
+                });
+            else
+                throw new Error('BAD_REQUEST')
+
+
         } 
         catch (err) {
 
-            if(err.message === 'INVALID_PAYLOAD')
+            console.log('error at get controller: ', err);
+            if(err.message in ['INVALID_PAYLOAD', 'BAD_REQUEST'])
                 err.status = 400
             next(err)
 
