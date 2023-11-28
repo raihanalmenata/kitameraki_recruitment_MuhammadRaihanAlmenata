@@ -6,8 +6,8 @@ class Task {
         
         this._verifyPayload(payload)
 
-        const { title, description } = payload
-        this.id = Task.id++
+        const { title, description, id } = payload
+        this.id = id ? String(id) : String(Task.id++)
         this.title = title
         this.description = description
     }
