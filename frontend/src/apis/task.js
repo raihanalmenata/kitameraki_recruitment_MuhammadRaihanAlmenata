@@ -53,5 +53,25 @@ export default {
         const response =  await fetch(req_url, data)
         return response
   
+      },
+      updateById : async (task) => {
+
+        const route = '/task'
+        const req_url = app_url + route
+      
+        const data = {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(task)
+        }
+        
+        const response =  await fetch(req_url, data)
+        const json = await response.json()
+  
+        return json
+  
       }
+
 }
