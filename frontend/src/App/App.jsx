@@ -1,11 +1,12 @@
 /* eslint-disable react/prop-types */
-import { useState } from 'react'
-import { useEffect } from 'react'
+import { useState, useEffect } from 'react'
 
 import { TextField } from '@fluentui/react/lib/TextField'
 import { PrimaryButton, DefaultButton } from '@fluentui/react/lib/Button'
 
 import taskAPI from '../apis/task'
+
+import './App.css'
 
 const TaskCard = ({ task, deleteHandler, updateHandler }) => {
 
@@ -39,7 +40,7 @@ const App = () => {
 
   useEffect(
     () => async () => {
-      const response = await taskAPI.getAll()
+      const response = await taskAPI.get({ current : 0, size : 8 })
       setTaskList(response.data)
     },
     []
@@ -99,9 +100,27 @@ const App = () => {
 
   }
 
+  const handleScroll = async (e) => {
+    
+    const element = e.target
+    const isScrolledToBottom = Math.abs(element.scrollHeight - element.clientHeight - element.scrollTop) < 1
+    
+    if(isScrolledToBottom){
+      console.log('TRIGGERED');
+      const totCurTask = taskList.length
+      const response = await taskAPI.get({ current : totCurTask, size : 5 })
+      console.log(response);
+      setTaskList([
+        ...taskList,
+        ...response.data
+      ])
+    }
+
+  }
+
   return (
     <div className="app-con">
-      <div className="list-con">
+      <div className="list-con" onScroll={handleScroll}>
         <ul className="task-list">
           {
             taskList.map(
