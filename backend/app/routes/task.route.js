@@ -10,5 +10,6 @@ router.use(require('../middlewares/logger.middleware'))
 router.get('/', taskController.getAll)
 router.post('/', taskController.insert)
 router.delete('/', taskController.deleteById)
+router.put('/', taskController.updateById)
 
 module.exports = router
