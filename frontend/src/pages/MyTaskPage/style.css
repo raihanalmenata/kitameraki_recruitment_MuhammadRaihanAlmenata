@@ -1,0 +1,9 @@
+.list-con {
+    max-height: 70vh;
+    overflow-y: scroll;
+}
+
+.form-con {
+    max-height: 30vh;
+    background-color: aqua;
+}
