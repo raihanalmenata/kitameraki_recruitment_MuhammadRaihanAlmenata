@@ -38,12 +38,13 @@ const TaskForm = () => {
                     />
                 </div>
                 <div className="desc-con">
-                    <TextField label='Task description' name='description' />
+                    <TextField label='Task description' name='description' multiline resizable={false} rows={3}/>
                 </div>
                 <div className="button-con">
                     <PrimaryButton
-                        text='submit'
+                        text='Add'
                         type='submit'
+                        className='form-but'
                     />
                 </div>
             </form>

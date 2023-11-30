@@ -10,7 +10,7 @@ const MyTaskPage = () => {
 
 return (
   <TasksProvider>
-    <div className="page-con">
+    <div className="my-task-page">
       <TaskList/>
       <TaskForm/>
     </div>

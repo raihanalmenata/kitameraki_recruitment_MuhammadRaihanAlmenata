@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import { useState } from 'react'
 
-import { Stack, Pivot, PivotItem } from '@fluentui/react'
+import { Pivot, PivotItem, Text } from '@fluentui/react'
 
 import MyTaskPage from './pages/MyTaskPage'
 import SettingPage from './pages/SettingPage'
@@ -9,7 +9,6 @@ import SettingPage from './pages/SettingPage'
 const App = () => {
 
   const [currentPage, setCurrentPage] = useState('MyTaskPage')
-  console.log(currentPage);
 
   let CurrentPage = null
   switch (currentPage) {
@@ -26,12 +25,12 @@ const App = () => {
 
   return (
     <div className="app-con">
-      <Stack horizontal horizontalAlign='center'>
-        <Pivot onLinkClick={ e => setCurrentPage(e.props.itemKey) }>
-          <PivotItem headerText='My Task' itemKey={'MyTaskPage'} />
-          <PivotItem headerText='Setting' itemKey={'SettingPage'}/>
-        </Pivot>
-      </Stack>
+      <nav className="navbar">
+          <Pivot onLinkClick={ e => setCurrentPage(e.props.itemKey) }>
+              <PivotItem headerText='My Task' itemKey={'MyTaskPage'} />
+              <PivotItem headerText='Setting' itemKey={'SettingPage'}/>
+            </Pivot>
+      </nav>
       <CurrentPage/>
     </div>
   )

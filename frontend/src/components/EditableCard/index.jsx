@@ -16,19 +16,27 @@ const TaskCard = ({ id, title, description, onDelete, onSave, onEdit, editMode }
         <li className="task-card">
             {
                 editMode ?
-                    <form onSubmit={handleSubmit}>
-                        <TextField label='Title' name='title' defaultValue={title} onGetErrorMessage={(val) => val === '' ? 'Please fill this field' : ''} validateOnFocusOut required />
-                        <TextField label='Description' name='description' defaultValue={description} />
-                        <input name='id' type="number" value={id} style={{ display: 'none' }} readOnly />
-                        <PrimaryButton text='save' type='submit' />
+                    <form className='card-form' onSubmit={handleSubmit}>
+                        <div className="field-con">
+                            <TextField className='title-field' name='title' defaultValue={title} onGetErrorMessage={(val) => val === '' ? 'Please fill this field' : ''} validateOnFocusOut required />
+                            <TextField name='description' defaultValue={description} />
+                            <input name='id' type="number" value={id} style={{ display: 'none' }} readOnly />
+                        </div>
+                        <div className="but-con">
+                            <PrimaryButton text='save' type='submit' />
+                        </div>
                     </form>
                     :
-                    <>
-                        <h3 className="task-title">{title}</h3>
-                        <p className="task-desc">{description}</p>
-                        <DefaultButton text='delete' onClick={() => onDelete({id, title, description})} />
-                        <DefaultButton text='edit' onClick={() => onEdit({id, title, description})} />
-                    </>
+                    <div className='card-info'>
+                        <div className="field-con">
+                        <TextField className='title-field' value={title} readOnly />
+                        <TextField value={description} readOnly />                            
+                        </div>
+                        <div className="but-con">
+                            <DefaultButton text='edit' onClick={() => onEdit({id, title, description})} />
+                            <DefaultButton text='delete' onClick={() => onDelete({id, title, description})} />
+                        </div>
+                    </div>
             }
         </li>
     )
