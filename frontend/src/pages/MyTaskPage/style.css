@@ -86,11 +86,11 @@
     margin: 0px;
 }
 
-.task-card .card-info .fieldGroup-131 {
+.task-card .card-info .ms-TextField-fieldGroup {
     border: none;
 }
 
-.task-card .title-field .fieldGroup-131 input {
+.task-card .title-field .ms-TextField-fieldGroup input {
     font-weight: 700;
 }
 

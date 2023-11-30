@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import { useState } from 'react'
 
-import { Pivot, PivotItem, Text } from '@fluentui/react'
+import { Pivot, PivotItem } from '@fluentui/react'
 
 import MyTaskPage from './pages/MyTaskPage'
 import SettingPage from './pages/SettingPage'
