@@ -1,12 +1,12 @@
+/* eslint-disable react/prop-types */
 import EditableCard from '../../../../components/EditableCard'
 
 import taskAPI from '../../../../adapters/task'
 
-import { useTasks, useTasksDispatch } from '../../../../stores/tasks'
+import { useTasksDispatch } from '../../../../stores/tasks'
 
 const TaskCard = ({ task, editMode, editableTasksDispatch }) => {
 
-    const tasks = useTasks()
     const tasksDispatch = useTasksDispatch()
 
     const deleteHandler = async (cardData) => {
