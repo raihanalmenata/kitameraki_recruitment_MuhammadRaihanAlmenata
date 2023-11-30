@@ -49,7 +49,6 @@ module.exports = {
         } 
         catch (err) {
 
-            console.log('error at get controller: ', err);
             if(err.message in ['INVALID_PAYLOAD', 'BAD_REQUEST'])
                 err.status = 400
             next(err)
@@ -60,7 +59,6 @@ module.exports = {
     deleteById : (req, res, next) => {
         try {
 
-            console.log(req.body);
             const targetId = req.body.id
             
             for (let i = 0; i < db['tasks'].length; i++) {                
@@ -98,7 +96,6 @@ module.exports = {
                 const curId = db['tasks'][i]['id']
                 if(curId == id){
                     db['tasks'][i] = new Task({title, description, id})
-                    console.log('Current DB: ', db['tasks']);
                     return res.status(200).json({
                         success: true,
                         code: 200,
