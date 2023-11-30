@@ -1,0 +1,1 @@
+export { default as editableTasksReducer } from './reducer'
