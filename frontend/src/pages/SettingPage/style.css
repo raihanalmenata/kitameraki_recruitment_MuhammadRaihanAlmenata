@@ -1,0 +1,9 @@
+.opt-field {
+    flex-basis: 20%;
+    background-color: gainsboro;   
+}
+
+.form-field {
+    flex-basis: 80%;
+    background-color: azure;   
+}
